@@ -1,11 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 const app = express();
 
+const dbConfig = require('./config/database');
+
+app.use(cookieParser());
+app.use(logger('dev'));
+
 mongoose.Promise = global.Promise;
 mongoose.connect(
-    'mongodb://hakunamatata:vforvendetta1@ds155665.mlab.com:55665/hakunamatata', 
+    dbConfig.url, 
     { useNewUrlParser: true }
 );
 
